@@ -9,7 +9,7 @@ VOLUME /config
 ARG REPO=https://git.doszgep.hu/crys/thelounge.git
 ARG BRANCH=master
 
-RUN apk --update --no-cache add python build-base git && \
+RUN apk --update --no-cache add python2 build-base git && \
     git clone --single-branch --branch "${BRANCH}" "${REPO}" /tmp/thelounge && \
     cd /tmp/thelounge && \
     yarn --non-interactive --production=false install && \
@@ -20,6 +20,6 @@ RUN apk --update --no-cache add python build-base git && \
     cd / && \
     rm -rf /tmp/thelounge && \
     yarn --non-interactive cache clean && \
-    apk del python build-base git
+    apk del python2 build-base git
 
 CMD ["thelounge", "start"]
